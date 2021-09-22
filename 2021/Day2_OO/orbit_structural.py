@@ -15,9 +15,11 @@ ax.set_aspect('equal')
 
 ax.plot([0],[0],'o',ms=30, c='gold')
 
+N=3
+
 planetCoords, planetVels = planetInit()
 
-tailLength=200
+tailLength=50
 tail = np.ones((tailLength,2))*planetCoords
 
 line1, =ax.plot([],[],'b.',ms=20)
