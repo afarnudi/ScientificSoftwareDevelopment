@@ -10,16 +10,43 @@ import matplotlib.animation as animation
 class Planet():
     def __init__(self):
         self.xy  = np.random.rand(2)*2-1
-        self.vxy = self.genVelocities()  
+        self.vxy = self.genVelocities()
     def genVelocities(self):
         vxy = np.zeros(2)
         vxy[0]=np.sqrt(1/(1+self.xy[0]**2/self.xy[1]**2))
         vxy[1]=-vxy[0]*self.xy[0]/self.xy[1]
-        return vxy
+        return vxy*0.005
     def getCoords(self):
         return self.xy
-    def evolveTimeStep(self):
-        self.xy+=self.vxy
+    def evolveTimeStep(self, G):
+        self.calcAcc()
+        f_n_1 = np.copy(self.acc)
+        self.xy += self.vxy + 0.5*self.acc
+        self.calcAcc()
+        self.vxy += 0.5*(f_n_1 + self.acc)
+    def calcAcc(self):
+        self.r = np.sqrt(np.sum(np.square(self.xy)))
+        self.accDir = -self.xy/self.r
+        self.acc = self.accDir*G/self.r**2
+    def getColour(self):
+        return self.color
+
+
+class Earth(Planet):
+    def __init__(self):
+        Planet.__init__(self)
+        self.vxy*=0.1
+        self.color = [0.09607843, 0.80538092, 0.89240058, 1.        ]
+    def calcAcc(self):
+        self.r = np.sqrt(np.sum(np.square(self.xy)))
+        self.accDir = -self.xy/self.r
+        self.acc = self.accDir*G*0.1/self.r**2
+        
+        
+class Jupiter(Planet):
+    def __init__(self):
+        Planet.__init__(self)
+        self.color = [1.,         0.41796034, 0.21393308, 1.        ]
 
 fig, ax = plt.subplots()
 ax.set_xlim(-1,1)
@@ -28,21 +55,33 @@ ax.set_aspect('equal')
 
 ax.plot([0],[0],'o',ms=30, c='gold')
 
-earth = Planet()
+N= 30
+
+planets = []
+for i in range(N):
+    if np.random.rand()<0.5:
+        planets.append(Earth())
+    else:
+        planets.append(Jupiter())
+
+
 
 G = 0.00002
-line1, =ax.plot([],[],'b.',ms=20)
+lines =[]
+for planet in planets:
+    lines.append(ax.plot([],[],'.',ms=20, c=planet.getColour()  )[0] )
 
-print(earth.getCoords())
 
-def animate(i,earth):
-    earth.evolveTimeStep()    
+
+def animate(i,earth, lines):
     
-    line1.set_data(earth.getCoords()[0],earth.getCoords()[1])  # update the data
-    return line1,
+    for planet, line in zip(planets,lines):
+        planet.evolveTimeStep(G)    
+        line.set_data(planet.getCoords()[0],planet.getCoords()[1])  # update the data
+    return lines
 
 ani = animation.FuncAnimation(fig, animate, 
-                              fargs=(earth,),
+                              fargs=(planets,lines),
                               interval=2, 
                               blit=True,
                               )
