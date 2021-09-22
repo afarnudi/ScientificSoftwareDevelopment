@@ -23,9 +23,14 @@ def animate(i,planetCoords,planetVels):
     deltaRMag = np.sqrt(np.sum(np.square(planetCoords)))
     AcceDir  = -planetCoords/deltaRMag
     AcceMag  = G/deltaRMag**2
+    Acce_n_1  = AcceMag*AcceDir
     
     planetCoords += 0.5*AcceMag*AcceDir + planetVels
-    planetVels   += AcceMag*AcceDir 
+    deltaRMag = np.sqrt(np.sum(np.square(planetCoords)))
+    AcceDir  = -planetCoords/deltaRMag
+    AcceMag  = G/deltaRMag**2
+    
+    planetVels   += 0.5*(AcceMag*AcceDir + Acce_n_1) 
     
     
     line1.set_data(planetCoords[0],planetCoords[1])  # update the data
