@@ -1,0 +1,1 @@
+import numpy as npdef planetCoordInit():    return np.random.rand(2)*2-1
