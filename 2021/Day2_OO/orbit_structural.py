@@ -17,27 +17,33 @@ ax.plot([0],[0],'o',ms=30, c='gold')
 
 N=3
 
-planetCoords, planetVels = planetInit()
+planetCoords, planetVels = planetInit(N)
 
 tailLength=50
-tail = np.ones((tailLength,2))*planetCoords
+tails = np.ones((N,tailLength,2))*planetCoords.reshape(N,1,2)
 
-line1, =ax.plot([],[],'b.',ms=20)
-line2, =ax.plot([],[],'b',lw=2)
+from matplotlib.pyplot import cm
+colors = cm.rainbow(np.linspace(0,1,N))
 
-def animate(i,planetCoords,planetVels,tail, line, tailLine):
+lines =[]
+for c in colors:
+    lines.append(ax.plot([],[],'.',ms=20, c= c)[0])
+    lines.append(ax.plot([],[],ms=10, c= c)[0])
+
+def animate(i,planetCoords,planetVels,tails, lines):
     G = 0.00002
     planetCoords, planetVels = VelocityVerlet(planetCoords, planetVels, G)
     
-    tail[:-1] = tail[1:]
-    tail[-1]  = planetCoords
+    tails[:,:-1] = tails[:,1:]
+    tails[:,-1] =  planetCoords
     
-    line.set_data(planetCoords[0],planetCoords[1])  # update the data
-    tailLine.set_data(tail[:,0],tail[:,1])
-    return line, tailLine
+    for i in range(planetCoords.shape[0]):
+        lines[i*2].set_data(planetCoords[i,0],planetCoords[i,1])  # update the data
+        lines[i*2+1].set_data(tails[i,:,0],tails[i,:,1])  # update the data
+    return lines
 
 ani = animation.FuncAnimation(fig, animate, 
-                              fargs=(planetCoords,planetVels,tail, line1, line2),
+                              fargs=(planetCoords,planetVels,tails, lines),
                               interval=2, 
                               blit=True,
                               )
