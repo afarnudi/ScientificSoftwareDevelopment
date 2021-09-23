@@ -1,3 +1,6 @@
+*.DS_Store
+2021/Day2_OO/__pycache__/
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
