@@ -55,7 +55,7 @@ ax.set_aspect('equal')
 
 ax.plot([0],[0],'o',ms=30, c='gold')
 
-N= 30
+N= 50
 
 planets = []
 for i in range(N):
@@ -85,6 +85,47 @@ ani = animation.FuncAnimation(fig, animate,
                               interval=2, 
                               blit=True,
                               )
+
+
+
+class CelestialObject():
+    def __init__(self, name, coords, vels):
+        self.name = name
+        self.coordinates = coords
+        self.velocity = vels
+    
+    
+class Palnet(CelestialObject):
+    def __init__(self, name, coords, vels, moons):
+        CelestialObject.__init__(name, coords, vels)
+        self.number_of_moons = moons
+        self.atmosphere = False
+
+class Palnet(CelestialObject):
+    def __init__(self, name, coords, vels, temperature):
+        CelestialObject.__init__(name, coords, vels)
+        self.temperature = temperature
+
+
+earth = Planet('Earth', [0,0], [-1,2], 1)
+mars  = Planet('Mars',  [10,0], [-4,3], 2)
+
+
+
+        
+        
+        
+        
+        
+
+
+
+
+
+
+
+
+
 
 
 
