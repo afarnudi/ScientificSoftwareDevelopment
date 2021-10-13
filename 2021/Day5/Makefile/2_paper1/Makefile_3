@@ -1,0 +1,10 @@
+#Example makefile 3
+
+all: paper1.pdf
+
+paper1.pdf: paper1.tex
+	pdflatex paper1.tex
+
+
+clean:
+	rm -f *.pdf *.out *aux *bbl *blg *log *toc *.ptb *.tod *.fls *.fdb_latexmk *.lof

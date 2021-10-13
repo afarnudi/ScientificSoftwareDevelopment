@@ -1,0 +1,6 @@
+#makefile example 2
+
+all: paper1.pdf
+
+paper2.pdf: paper1.tex
+	pdflatex paper2.tex

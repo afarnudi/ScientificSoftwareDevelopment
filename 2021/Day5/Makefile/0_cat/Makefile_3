@@ -1,0 +1,6 @@
+TARGET=Book1.txt
+CHAPTERS=intro.txt Chapter_1.txt Chapter_2.txt
+
+$(TARGET): $(CHAPTERS) 
+	@cat $^ > $(TARGET)
+	@echo Book ready.

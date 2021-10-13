@@ -1,0 +1,66 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{graphicx}
+\usepackage{palatino}
+
+\usepackage[procnames]{listings}
+\usepackage{xcolor}
+\definecolor{keycolor}{RGB}{172, 42, 42}
+\definecolor{mbleu}{RGB}{64,96,127}
+\definecolor{vimvert}{RGB}{46, 139, 87}
+
+\lstdefinestyle{global}{
+basicstyle=\ttfamily\footnotesize\color{black!90},%
+stringstyle=\itshape\color{magenta},%
+showstringspaces=false,%
+keywordstyle=\bfseries\color{keycolor},%
+commentstyle=\color{blue}\slshape,%
+framexleftmargin=1mm,%
+backgroundcolor=\color{black!2},%
+    }
+
+\lstdefinestyle{makefile}{
+otherkeywords={.SUFFIXES},
+morekeywords={SUFFIX, CPP_,},
+moredelim=[is][\color{mbleu}]{/*}{*/},
+style=global,%
+morecomment=[l][commentstyle]{\#},%
+emphstyle={\color{vimvert}},%
+moredelim=[s][\color{vimvert}]{\$(}{)}%
+}
+
+
+\title{Describing the paper producing pipeline that produced this paper}
+
+\author{Ali Farnudi, David Grellscheid}
+
+\begin{document}
+\maketitle
+
+\begin{center}
+        \includegraphics[width=8cm]{bar.png}
+\end{center}
+\section{Workflow}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus interdum suscipit erat. Nullam in bibendum tortor, non sagittis est. Mauris sodales turpis a elit euismod tincidunt. Duis aliquam vulputate iaculis. Vivamus ultricies dui at nunc sollicitudin, at efficitur mi tempor. Vestibulum porta ut lectus iaculis condimentum. Proin eget porta lectus, et dapibus nunc. Morbi ac ultrices arcu. Etiam mi elit, malesuada a vestibulum et, eleifend non purus. Nunc nec nunc mattis, dignissim massa eget, aliquam nibh. Nunc ultrices ut libero eget volutpat. Cras non hendrerit neque, ut venenatis lorem. Quisque posuere fermentum nisi, at egestas mauris consectetur eget. Ut id massa non ligula congue bibendum id id risus. Nulla pulvinar mi consequat eros volutpat, vel eleifend dolor maximus. Praesent vitae urna placerat dui hendrerit congue ut quis nisl.
+
+Sed tristique orci ac metus eleifend, sit amet viverra augue accumsan. Nam id neque luctus, dictum ligula id, ultrices nisl. Pellentesque mollis ligula at pretium cursus. Maecenas feugiat gravida libero ac sollicitudin. Suspendisse dignissim sodales nibh fermentum tempor. Maecenas pellentesque risus leo, et auctor purus pretium eu. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer sit amet velit elit.
+
+\begin{center}
+	\includegraphics[width=8cm]{foo.png}
+\end{center}
+
+
+\section{Make dependencies}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus interdum suscipit erat. Nullam in bibendum tortor, non sagittis est. Mauris sodales turpis a elit euismod tincidunt. Duis aliquam vulputate iaculis. Vivamus ultricies dui at nunc sollicitudin, at efficitur mi tempor. Vestibulum porta ut lectus iaculis condimentum. Proin eget porta lectus, et dapibus nunc. Morbi ac ultrices arcu. Etiam mi elit, malesuada a vestibulum et, eleifend non purus. Nunc nec nunc mattis, dignissim massa eget, aliquam nibh. Nunc ultrices ut libero eget volutpat. Cras non hendrerit neque, ut venenatis lorem. Quisque posuere fermentum nisi, at egestas mauris consectetur eget. Ut id massa non ligula congue bibendum id id risus. Nulla pulvinar mi consequat eros volutpat, vel eleifend dolor maximus. Praesent vitae urna placerat dui hendrerit congue ut quis nisl.
+
+Sed tristique orci ac metus eleifend, sit amet viverra augue accumsan. Nam id neque luctus, dictum ligula id, ultrices nisl. Pellentesque mollis ligula at pretium cursus. Maecenas feugiat gravida libero ac sollicitudin. Suspendisse dignissim sodales nibh fermentum tempor. Maecenas pellentesque risus leo, et auctor purus pretium eu. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer sit amet velit elit.
+
+\section{The Makefile contents}
+
+\hrule
+\lstinputlisting[style=makefile]{Makefile}
+\hrule
+
+\section{}
+
+\end{document}

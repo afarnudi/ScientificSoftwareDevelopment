@@ -1,0 +1,23 @@
+#Example makefile 4
+
+PDFCC=pdflatex
+FLAGS= -interaction="batchmode"
+PAPER=paper2
+FIGS=Fig1.pdf
+
+all: $(PAPER).pdf
+
+$(PAPER).pdf: $(PAPER).tex $(FIGS) $(PAPER).bib
+	@$(PDFCC) $(FLAGS) $<
+	@$(PDFCC) $(FLAGS) $<
+	bibtex $(PAPER).aux
+	@$(PDFCC) $(FLAGS) $<
+	@$(PDFCC) $(FLAGS) $<
+	@echo PDF generated
+
+$(FIGS): Fig1gen.py funcs.py
+	@python3 $< 
+	@echo $(FIGS) generated
+
+clean:
+	rm -f *.out *aux *bbl *blg *log *toc *.ptb *.tod *.fls *.fdb_latexmk *.lof

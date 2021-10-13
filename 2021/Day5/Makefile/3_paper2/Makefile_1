@@ -1,0 +1,14 @@
+#Example makefile 4
+
+PAPER=paper2
+
+all: $(PAPER).pdf
+
+$(PAPER).pdf: $(PAPER).tex Fig1.pdf 
+	pdflatex $(PAPER)
+
+Fig1.pdf: Fig1gen.py funcs.py
+	python3 Fig1gen.py
+
+clean:
+	rm -f *.out *aux *bbl *blg *log *toc *.ptb *.tod *.fls *.fdb_latexmk *.lof

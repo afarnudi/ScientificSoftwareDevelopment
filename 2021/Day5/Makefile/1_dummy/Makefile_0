@@ -1,0 +1,9 @@
+
+all: print1 print2
+
+
+print1:
+	@echo hello print1
+
+print2:
+	@echo hello print2
