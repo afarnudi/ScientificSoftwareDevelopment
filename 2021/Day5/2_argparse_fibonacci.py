@@ -13,11 +13,15 @@ def main():
         "Fibonacci Calculator", description="Calculate Fibonacci numbers"
     )
     parser.add_argument("num", help="Print the n'th Fibonacci number.", type=int)
-
+    parser.add_argument("-p","--print", help="Print Fibonacci number up to the n'th number", action= "store_true")
     args = parser.parse_args()
 
     result = fibonacci(args.num)
-    print(f"Fib({args.num}) = {result}")
+    if args.print=='True':
+        for i in range(2,args.num+1):
+            print(fibonacci(i),end=' ')
+    else:
+        print(f"Fib({args.num}) = {result}")
 
 
 if __name__ == "__main__":
